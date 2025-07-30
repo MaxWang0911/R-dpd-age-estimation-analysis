@@ -1,59 +1,48 @@
-# DPD Age Estimation Analysis in R
+# 🦷 DPD Age Estimation Analysis in R
 
-This project is a statistical and visual analysis of a dental dataset (`dpd.df`) from the **dafs** package in R. The analysis focuses on the estimation of age based on DPD ratios and explores differences across gender. The project was completed by **Zheng Wang** as part of academic coursework in 2024.
-
-## 📊 Objective
-
-To perform descriptive and graphical analysis of DPD ratio and age estimation accuracy by gender using R.
-
-## 📁 Dataset
-
-- **Source**: `dpd.df` from the `dafs` package
-- **Variables include**:
-  - `age`: true age
-  - `sex`: gender (M/F)
-  - `dpd.ratio`: dental measurement ratio
-  - `est.age`: estimated age
-  - `real.error`: difference between estimated and actual age
-
-## 🧪 Analysis Tasks
-
-- Missing value checks and summary statistics
-- Gender counts and age distribution
-- Max DPD ratio by gender
-- Interquartile range of real errors
-- Boxplots, histograms, bar plots, and density plots
-- Gender-wise comparison of estimation errors
-
-## 🖥️ Tools Used
-
-- `R`
-- Packages: `ggplot2`, `dafs`
-
-## 📈 Key Visuals
-
-- Boxplots of real error by gender
-- Histograms with density lines for male and female real error distributions
-- Bar plot of mean estimated age by gender
-
-## 📌 Author
-
-**Zheng Wang**  
-Email: zheng.wang-15@student.uts.edu.au  
-Date: 2024-09-12  
-R Version: 4.3.3
+This project investigates how dental pulp-to-dentine (DPD) ratios relate to chronological age and whether this relationship can be modeled to estimate age. It uses statistical modeling and visualization techniques in R to explore the strength of the relationship and the impact of variables like sex and molar count.
 
 ---
 
-## ▶️ How to Run
+## 🎯 Problem
 
-```r
-install.packages("dafs")
-library(dafs)
-library(ggplot2)
+Can the **DPD ratio** be used to accurately **estimate a person's age**?  
+What roles do **sex** and **molar count** play in improving prediction accuracy?
 
-# Load dataset
-data(dpd.df)
+---
 
-# Then run the analysis from the provided script:
-source("Zheng_Wang_DPD_Analysis_Final.R")
+## 🧠 Approach
+
+We used R to explore the dataset and build regression models:
+
+- 📊 Exploratory data analysis
+- 📈 Linear modelling:
+  - `age ~ dpd.ratio`
+  - `age ~ dpd.ratio + sex`
+  - `age ~ dpd.ratio * sex`
+  - `age ~ poly(dpd.ratio, 2)`
+  - `age ~ dpd.ratio + sex + molar`
+- 📏 Model performance compared via AIC, adjusted R², and F-statistics
+- 📉 Residual diagnostics
+
+---
+
+## 📊 Key Findings
+
+- **DPD ratio is a strong predictor of age** (p < 0.001)
+- Simple linear model `age ~ dpd.ratio` performs best (lowest AIC: 183.5)
+- Adding **sex** and **molar count** or interaction terms offers no significant improvement
+- Diagnostic plots show good model fit
+
+---
+
+## ✅ Recommendation
+
+Use a **simple linear model** (`age ~ dpd.ratio`) for age prediction.  
+Future improvements may involve:
+- Larger sample size
+- Additional dental or skeletal biomarkers
+- External validation datasets
+
+---
+
